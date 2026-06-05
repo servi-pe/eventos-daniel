@@ -1,0 +1,1153 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Portafolio - Bryan Viveros</title>
+
+
+
+
+<style>
+
+    /* =====================================
+   INTRO GLITCH
+===================================== */
+
+.intro {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+    z-index: 1000;
+}
+
+.glitch-text {
+    font-size: clamp(1.8rem, 8vw, 4rem);
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 0 1rem;
+
+    text-shadow:
+        0.05em 0 0 rgba(255,0,0,.75),
+        -0.05em -0.025em 0 rgba(0,255,0,.75),
+        0.025em 0.05em 0 rgba(0,0,255,.75);
+
+    animation: glitch 0.3s infinite;
+}
+
+.intro-subtitle {
+    color: #0f0;
+    font-family: monospace;
+    font-size: clamp(0.8rem, 4vw, 1.2rem);
+    text-align: center;
+}
+
+.static {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,255,0,.05) 0px,
+        rgba(0,255,0,.05) 2px,
+        transparent 2px,
+        transparent 6px
+    );
+
+    pointer-events: none;
+    z-index: 2;
+    animation: flicker 0.2s infinite;
+}
+
+.noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMTUiLz48L3N2Zz4=');
+
+    background-repeat: repeat;
+    background-size: 150px;
+
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes glitch {
+    0% { transform: skew(0deg, 0deg); }
+    20% { transform: skew(2deg, 1deg); }
+    40% { transform: skew(-2deg, -1deg); }
+    60% { transform: skew(1deg, -1deg); }
+    80% { transform: skew(-1deg, 1deg); }
+    100% { transform: skew(0deg, 0deg); }
+}
+
+@keyframes flicker {
+    0% { opacity: .3; }
+    100% { opacity: .6; }
+}
+
+
+
+
+/* RESET + BASE BRUTALISTA */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f4f1ea;  /* fondo cálido tipo papel / crudo */
+    color: #1a1a1a;
+    font-family: 'Space Mono', 'Inter', monospace;
+    line-height: 1.5;
+    position: relative;
+}
+
+/* ruido de fondo sutil (textura) */
+.noise-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* HEADER BRUTAL */
+.brutal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 3px solid #1a1a1a;
+    padding-bottom: 1rem;
+    margin-bottom: 3rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.header-left {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.ascii-mark {
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -2px;
+}
+
+.version {
+    font-size: 0.7rem;
+    background: #1a1a1a;
+    color: #f4f1ea;
+    padding: 0.2rem 0.5rem;
+}
+
+.header-right {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.status {
+    color: #16a34a;
+}
+
+/* MANIFIESTO */
+.manifesto {
+    margin-bottom: 3rem;
+}
+
+.brutal-title {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 1rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.bracket {
+    color: #ff6b35;
+}
+
+.mono-sub {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: #4a4a4a;
+    margin-bottom: 0.5rem;
+}
+
+.line-accent {
+    width: 80px;
+    height: 3px;
+    background: #ff6b35;
+    margin: 0.8rem 0;
+}
+
+.hero-desc p {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight {
+    background: #ffebd2;
+    padding: 0.1rem 0.3rem;
+    font-weight: bold;
+}
+
+.tagline-stamp {
+    display: inline-block;
+    border: 2px solid #1a1a1a;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+/* FILTROS estilo código */
+.filter-bar {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin: 2rem 0 2.5rem;
+    border-top: 1px solid #ccc;
+    padding-top: 2rem;
+}
+
+.filter-btn {
+    background: none;
+    border: 2px solid #1a1a1a;
+    padding: 0.4rem 1rem;
+    font-family: 'Space Mono', monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.8rem;
+}
+
+.filter-btn.active {
+    background: #1a1a1a;
+    color: #f4f1ea;
+}
+
+.filter-btn:hover {
+    background: #ff6b35;
+    border-color: #ff6b35;
+    color: white;
+}
+
+/* GRID BRUTALISTA (ASIMÉTRICO) */
+.projects-brutal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.brut-card {
+    background: white;
+    border: 2px solid #1a1a1a;
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.2s linear;
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.1);
+    display: block;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.brut-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 12px 12px 0px 0px rgba(0,0,0,0.15);
+}
+
+.double-feature {
+    grid-row: span 1;
+    background: #fffaf5;
+}
+
+.wide-card {
+    grid-column: span 1;
+}
+
+.card-code {
+    font-family: monospace;
+    font-size: 0.7rem;
+    color: #888;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.brut-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #ff6b35;
+}
+
+.brut-card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -1px;
+    font-family: 'Space Mono', monospace;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+}
+
+.tech-tags span {
+    font-family: monospace;
+    font-size: 0.65rem;
+    background: #f0ede8;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid #ddd;
+}
+
+.brut-desc {
+    font-size: 0.85rem;
+    margin: 0.8rem 0;
+    line-height: 1.4;
+    color: #2c2c2c;
+}
+
+.card-metrics {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.7rem;
+    font-family: monospace;
+    margin: 1rem 0;
+    color: #555;
+}
+
+.brut-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #1a1a1a;
+    border-bottom: 2px solid #ff6b35;
+    padding-bottom: 2px;
+    font-family: monospace;
+    transition: 0.1s;
+}
+
+.brut-link:hover {
+    color: #ff6b35;
+    border-bottom-color: #1a1a1a;
+}
+
+.watermark {
+    position: absolute;
+    bottom: 0.8rem;
+    right: 1rem;
+    font-size: 2rem;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* ESTADÍSTICAS RAW */
+.stats-raw {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background: white;
+    border: 2px solid #1a1a1a;
+    padding: 2rem;
+    margin: 3rem 0;
+    box-shadow: 4px 4px 0 0 #ddd;
+}
+
+.stat-block {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-number-raw {
+    font-size: 2.8rem;
+    font-weight: 800;
+    font-family: 'Space Mono', monospace;
+    color: #ff6b35;
+    line-height: 1;
+}
+
+.stat-desc {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* TERMINAL DE CONTACTO */
+.terminal-contact {
+    background: #1a1a1a;
+    border: 2px solid #ff6b35;
+    margin: 2rem 0;
+    font-family: 'Space Mono', monospace;
+    overflow: hidden;
+}
+
+.terminal-header {
+    background: #2c2c2c;
+    padding: 0.5rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    border-bottom: 1px solid #ff6b35;
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+
+.terminal-path {
+    margin-left: auto;
+    font-size: 0.7rem;
+    color: #aaa;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    color: #e0e0e0;
+}
+
+.terminal-line {
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+.prompt {
+    color: #ff6b35;
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.terminal-btn {
+    background: none;
+    border: 1px solid #ff6b35;
+    padding: 0.6rem 1.2rem;
+    color: #ff6b35;
+    font-family: monospace;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: 0.2s;
+    font-weight: bold;
+}
+
+.terminal-btn:hover {
+    background: #ff6b35;
+    color: #1a1a1a;
+}
+
+/* FOOTER */
+.brut-footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid #1a1a1a;
+    padding-top: 1.5rem;
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.footer-right a {
+    text-decoration: none;
+    color: #1a1a1a;
+    margin-left: 1rem;
+}
+
+.footer-right a:hover {
+    color: #ff6b35;
+}
+
+/* RESPONSIVE */
+@media (max-width: 800px) {
+    .container {
+        padding: 1rem;
+    }
+    .brutal-title {
+        font-size: 2.5rem;
+    }
+    .stats-raw {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .brut-card {
+        box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.1);
+    }
+    .filter-bar {
+        gap: 0.5rem;
+    }
+}
+
+
+
+/* ============================================ */
+/* RESPONSIVE DESIGN - COMPLETO MEJORADO        */
+/* ============================================ */
+
+/* TABLETS (pantallas entre 768px y 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .brutal-title {
+        font-size: 3rem;
+    }
+    
+    .projects-brutal-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .stats-raw {
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+    
+    .stat-number-raw {
+        font-size: 2.2rem;
+    }
+}
+
+/* MÓVILES GRANDES (entre 600px y 768px) */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    /* Header adaptado */
+    .brutal-header {
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 2rem;
+    }
+    
+    .header-left {
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .header-right {
+        justify-content: flex-end;
+        width: 100%;
+    }
+    
+    /* Título principal */
+    .brutal-title {
+        font-size: 2.2rem;
+        word-wrap: break-word;
+    }
+    
+    .hero-desc p {
+        font-size: 1rem;
+    }
+    
+    /* Filtros - scroll horizontal en móvil */
+    .filter-bar {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        gap: 0.8rem;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .filter-btn {
+        white-space: nowrap;
+        font-size: 0.7rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    /* Grid de proyectos - una columna en móvil */
+    .projects-brutal-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    
+    /* Tarjetas más compactas */
+    .brut-card {
+        padding: 1.2rem;
+    }
+    
+    .brut-card-title {
+        font-size: 1.3rem;
+    }
+    
+    .brut-icon {
+        font-size: 1.8rem;
+    }
+    
+    .tech-tags span {
+        font-size: 0.6rem;
+    }
+    
+    .brut-desc {
+        font-size: 0.8rem;
+    }
+    
+    .card-metrics {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+    
+    /* Stats en columna */
+    .stats-raw {
+        flex-direction: column;
+        gap: 1.2rem;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .stat-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 0.8rem;
+    }
+    
+    .stat-block:last-child {
+        border-bottom: none;
+    }
+    
+    .stat-number-raw {
+        font-size: 2rem;
+        text-align: left;
+    }
+    
+    .stat-desc {
+        text-align: right;
+        font-size: 0.7rem;
+    }
+    
+    /* Terminal responsive */
+    .terminal-body {
+        padding: 1rem;
+    }
+    
+    .terminal-line {
+        font-size: 0.75rem;
+        word-wrap: break-word;
+    }
+    
+    .terminal-btn {
+        width: 100%;
+        font-size: 0.8rem;
+    }
+    
+    /* Footer */
+    .brut-footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-right a {
+        margin: 0 0.5rem;
+    }
+}
+
+/* MÓVILES PEQUEÑOS (menos de 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0.8rem;
+    }
+    
+    .brutal-title {
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+    }
+    
+    .ascii-mark {
+        font-size: 1.2rem;
+    }
+    
+    .version {
+        font-size: 0.6rem;
+    }
+    
+    .year, .status {
+        font-size: 0.7rem;
+    }
+    
+    .tagline-stamp {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.8rem;
+    }
+    
+    .brut-card {
+        padding: 1rem;
+    }
+    
+    .brut-card-title {
+        font-size: 1.2rem;
+    }
+    
+    .tech-tags {
+        gap: 0.3rem;
+    }
+    
+    .tech-tags span {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.5rem;
+    }
+    
+    .watermark {
+        font-size: 1.5rem;
+        opacity: 0.15;
+    }
+    
+    .stat-number-raw {
+        font-size: 1.6rem;
+    }
+    
+    .stat-desc {
+        font-size: 0.6rem;
+    }
+    
+    .terminal-line {
+        font-size: 0.7rem;
+    }
+    
+    .prompt {
+        font-size: 0.7rem;
+    }
+}
+
+/* TABLETS EN HORIZONTAL Y PANTALLAS MEDIANAS */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .projects-brutal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .wide-card {
+        grid-column: span 1;
+    }
+}
+
+/* PANTALLAS GRANDES (más de 1400px) */
+@media (min-width: 1400px) {
+    .container {
+        max-width: 1400px;
+    }
+    
+    .projects-brutal-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .brutal-title {
+        font-size: 5rem;
+    }
+}
+
+/* MEJORAS DE TÁCTIL PARA MÓVILES */
+@media (max-width: 768px) {
+    /* Botones más grandes para dedos */
+    .filter-btn,
+    .brut-link,
+    .terminal-btn,
+    .cta-button {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Evitar zoom en inputs (si los hay) */
+    input, select, textarea {
+        font-size: 16px;
+    }
+    
+    /* Scroll suave */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Mejor touch en tarjetas */
+    .brut-card {
+        cursor: pointer;
+        transition: transform 0.15s ease;
+    }
+    
+    .brut-card:active {
+        transform: scale(0.98);
+    }
+}
+
+/* ORIENTACIÓN PAISAJE EN MÓVILES */
+@media (max-width: 768px) and (orientation: landscape) {
+    .brutal-title {
+        font-size: 1.8rem;
+    }
+    
+    .projects-brutal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stats-raw {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .stat-block {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
+/* SOPORTE PARA PANTALLAS PLEGABLES */
+@media (max-width: 280px) {
+    .brutal-title {
+        font-size: 1.4rem;
+    }
+    
+    .tech-tags span {
+        font-size: 0.5rem;
+    }
+    
+    .card-metrics {
+        font-size: 0.6rem;
+    }
+}
+
+
+</style>
+
+
+
+
+
+
+<!-- INTRO GLITCH -->
+<div class="intro" id="introScreen">
+    <div class="static"></div>
+    <div class="noise"></div>
+
+    <div class="glitch-text">
+        >_ CARGANDO PROYECTOS...
+    </div>
+
+    <div class="intro-subtitle">
+        [DESARROLLADOR WEB BRYAN VIVEROS]
+    </div>
+</div>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>/// DEV PORTFOLIO // PROYECTOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:opsz,wght@14..32,400;14..32,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="noise-bg"></div>
+    
+    <div class="container">
+        <!-- HEADER BRUTALISTA -->
+        <header class="brutal-header">
+            <div class="header-left">
+                <div class="ascii-mark">[&lt;/&gt;]</div>
+                <div class="version">v2.0 // brutalism</div>
+            </div>
+            <div class="header-right">
+                <div class="year">2026</div>
+                <div class="status">● ACTIVE</div>
+            </div>
+        </header>
+
+        <!-- HERO SECTION TIPO MANIFIESTO -->
+        <section class="manifesto">
+            <h1 class="brutal-title">
+                <span class="bracket">{</span> MIS PROYECTOS <span class="bracket">}</span>
+            </h1>
+            <div class="subtitle-block">
+                <p class="mono-sub">~/developer/portfolio/projects — LIST</p>
+                <div class="line-accent"></div>
+            </div>
+            <div class="hero-desc">
+                <p>Sitios web funcionales, sin distracciones. <br>
+                <span class="highlight">Código limpio, diseño con propósito.</span></p>
+                <div class="tagline-stamp">+5 rubros // +0 bloatware</div>
+            </div>
+        </section>
+
+        <!-- FILTROS / CATEGORÍAS (estilo etiquetas de código) -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">[ todos ]</button>
+            <button class="filter-btn" data-filter="comercio">[ comercio ]</button>
+            <button class="filter-btn" data-filter="salud">[ salud ]</button>
+            <button class="filter-btn" data-filter="entretenimiento">[ entretenimiento ]</button>
+            <button class="filter-btn" data-filter="construccion">[ construcción ]</button>
+        </div>
+
+        <!-- GRID DE PROYECTOS - ESTILO TABLERO ASIMÉTRICO -->
+        <div class="projects-brutal-grid" id="projectsGrid">
+            
+            <!-- Barbería - card 1 -->
+            <div class="brut-card" data-category="comercio">
+                <div class="card-code">// 001</div>
+                <div class="brut-icon"><i class="fas fa-cut"></i></div>
+                <h2 class="brut-card-title">BARBERÍA</h2>
+                <div class="tech-tags">
+                    <span>turnos.js</span>
+                    <span>whatsapp_api</span>
+                    <span>gallery.raw</span>
+                </div>
+                <p class="brut-desc">Sistema de turnos online + galería de cortes + contacto directo.</p>
+                <div class="card-metrics">
+                    <span><i class="fas fa-calendar-check"></i> 98% uptime</span>
+                    <span><i class="fas fa-clock"></i> realtime</span>
+                </div>
+                <a href="barberia/barberia.html"target="_blank" class="brut-link">ACCEDER →</a>
+                <div class="watermark">✂️</div>
+            </div>
+
+            <!-- Veterinaria - card 2 (doble altura visual) -->
+            <div class="brut-card double-feature" data-category="salud">
+                <div class="card-code">// 002</div>
+                <div class="brut-icon"><i class="fas fa-paw"></i></div>
+                <h2 class="brut-card-title">CLÍNICA VETERINARIA</h2>
+                <div class="tech-tags">
+                    <span>pacientes.sql</span>
+                    <span>vacunas_api</span>
+                    <span>historial.med</span>
+                </div>
+                <p class="brut-desc">Gestión completa de mascotas, historial médico y recordatorios automáticos de vacunas.</p>
+                <div class="card-metrics">
+                    <span><i class="fas fa-database"></i> +200 pacientes</span>
+                    <span><i class="fas fa-bell"></i> alerts</span>
+                </div>
+                <a href="veterinaria.html" target="_blank" class="brut-link">ACCEDER →</a>
+                <div class="watermark">🐾</div>
+            </div>
+
+            <!-- Mueblería - card 3 -->
+            <div class="brut-card" data-category="comercio">
+                <div class="card-code">// 003</div>
+                <div class="brut-icon"><i class="fas fa-couch"></i></div>
+                <h2 class="brut-card-title">MUEBLERÍA</h2>
+                <div class="tech-tags">
+                    <span>catalogo.din</span>
+                    <span>cotizador.live</span>
+                    <span>envios.api</span>
+                </div>
+                <p class="brut-desc">Catálogo digital con filtros, cotizador en línea y envío a domicilio.</p>
+                <div class="card-metrics">
+                    <span><i class="fas fa-filter"></i> 4 categorías</span>
+                    <span><i class="fas fa-truck"></i> logística</span>
+                </div>
+                <a href="muebleria/muebleria.html" target="_blank" class="brut-link">ACCEDER →</a>
+                <div class="watermark">🪑</div>
+            </div>
+
+            <!-- Alquiler de Juegos - card 4 -->
+            <div class="brut-card wide-card" data-category="entretenimiento">
+                <div class="card-code">// 004</div>
+                <div class="brut-icon"><i class="fas fa-gamepad"></i></div>
+                <h2 class="brut-card-title">ALQUILER DE JUEGOS</h2>
+                <div class="tech-tags">
+                    <span>reservas.react</span>
+                    <span>stock.node</span>
+                    <span>catalogo.实时</span>
+                </div>
+                <p class="brut-desc">Reservas online, control de stock en tiempo real y catálogo interactivo.</p>
+                <div class="card-metrics">
+                    <span><i class="fas fa-chart-line"></i> stock live</span>
+                    <span><i class="fas fa-ticket-alt"></i> reservas</span>
+                </div>
+                <a href="#" class="brut-link">ACCEDER →</a>
+                <div class="watermark">🎮</div>
+            </div>
+
+            <!-- Constructora - card 5 -->
+            <div class="brut-card" data-category="construccion">
+                <div class="card-code">// 005</div>
+                <div class="brut-icon"><i class="fas fa-hard-hat"></i></div>
+                <h2 class="brut-card-title">CONSTRUCTORA</h2>
+                <div class="tech-tags">
+                    <span>portafolio.3d</span>
+                    <span>cotizaciones.pdf</span>
+                    <span>contact.form</span>
+                </div>
+                <p class="brut-desc">Portafolio de obras, cotizaciones profesionales y contacto directo.</p>
+                <div class="card-metrics">
+                    <span><i class="fas fa-building"></i> +15 obras</span>
+                    <span><i class="fas fa-file-signature"></i> presupuestos</span>
+                </div>
+                <a href="#" class="brut-link">ACCEDER →</a>
+                <div class="watermark">🏗️</div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE ESTADÍSTICAS RAW -->
+        <div class="stats-raw">
+            <div class="stat-block">
+                <div class="stat-number-raw">05</div>
+                <div class="stat-desc">proyectos<br>entregados</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-number-raw">100%</div>
+                <div class="stat-desc">responsive<br>design</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-number-raw">24/7</div>
+                <div class="stat-desc">soporte<br>técnico</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-number-raw">0</div>
+                <div class="stat-desc">bugs<br>conocidos</div>
+            </div>
+        </div>
+
+        <!-- CONTACTO TIPO TERMINAL -->
+        <div class="terminal-contact">
+            <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-path">contacto@devportfolio.sh</span>
+            </div>
+            <div class="terminal-body">
+                <p class="terminal-line"><span class="prompt">$</span> ./iniciar_colaboracion --proyecto="tu_idea"</p>
+                <p class="terminal-line"><span class="prompt">></span> ¿Listo para construir algo sólido?</p>
+                <button class="terminal-btn" id="brutContactBtn">
+                    <i class="fas fa-terminal"></i> ejecutar contacto.sh
+                </button>
+            </div>
+        </div>
+
+        <!-- FOOTER MINIMAL -->
+        <footer class="brut-footer">
+            <div class="footer-left">© 2026 // dev portfolio</div>
+            <div class="footer-right">
+                <a href="#">github</a>
+                <a href="#">linkedin</a>
+                <a href="#">behance</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Filtro de categorías
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.brut-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Actualizar active
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filterValue = btn.getAttribute('data-filter');
+                
+                cards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 200);
+                    }
+                });
+            });
+        });
+
+        // Links de proyectos
+       
+
+        // Botón terminal
+        document.getElementById('brutContactBtn').addEventListener('click', () => {
+            alert("📡 $ ./contactar\n>> Email: dev@brutportfolio.com\n>> WhatsApp: +123 456 7890");
+        });
+
+        // Efecto de ruido sutil en consola (solo estético)
+        console.log("%c/// BRUTAL PORTFOLIO v2.0 ///", "color: #ff6b35; font-size: 16px; font-family: monospace;");
+        console.log("%cDiseño con enfoque brutalista + raw data", "color: #2c2c2c; font-size: 12px;");
+    </script>
+
+
+
+<script>
+
+window.addEventListener('load', () => {
+
+    setTimeout(() => {
+
+        const intro = document.getElementById('introScreen');
+        const portfolio = document.getElementById('portfolioContent');
+
+        intro.style.transition = 'opacity 0.8s ease';
+        intro.style.opacity = '0';
+
+        setTimeout(() => {
+
+            intro.style.display = 'none';
+
+            if(portfolio){
+                portfolio.style.opacity = '1';
+            }
+
+        }, 800);
+
+    }, 2500);
+
+});
+
+
+</script>
+</body>
+</html>
